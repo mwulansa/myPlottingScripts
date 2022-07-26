@@ -1,4 +1,5 @@
 import ROOT
+import math
 
 r = {
     'MuonPt'    : [10, "Pt(GeV)", 250],
@@ -62,15 +63,20 @@ def variableName(argument):
         case "DimuonMass":
             return r['TauPt'][0],r['Mass'][0]
 
-def plotStyle(histogram, EvBin = 1, lineColour = 1, fillColour = 1, xtitle = "hist", fillStyle = 1001, draw = "point"):
+def plotStyle(histogram, EvBin = 1, lineColour = 1, fillColour = 0, xtitle = "hist", fillStyle = 1001, draw = "hist"):
 
     htemp = histogram.Clone("htemp")
 
     if draw == "point":
-        htemp.SetStats(0)   
-        htemp.SetLineWidth(3)
         htemp.SetMarkerStyle(8)
         htemp.SetMarkerSize(1)
+
+    htemp.SetStats(0)   
+    htemp.SetLineWidth(3)
+
+    if htemp.GetMaximum() >= 10000:
+        htemp.GetYaxis().SetMaxDigits(4)
+    else: htemp.GetYaxis().SetMaxDigits(3)
 
     htemp.SetLineColor(lineColour)
     htemp.SetFillColor(fillColour)
@@ -130,11 +136,12 @@ def drawRatio(bkgh,data,var):
   return ratio, ratio_band
 
 
-def drawPad1(var):
+def drawPad1(var, logy = False):
   pad1 = ROOT.TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
   # if var[1] == "M_{vis} (GeV)":
     # pad1.SetLogy();
-  # pad1.SetLogy();
+  if logy == True:
+      pad1.SetLogy();
   pad1.SetGridx();
   pad1.SetBottomMargin(0);
   pad1.Draw();
@@ -171,7 +178,7 @@ def drawCMS(cmsTextSize = 0.055):
     latex.DrawLatex(0.15, 0.8, extraText)
 
 
-def plot2D(pad, toPlot, htotal, path):
+def plot2D(toPlot,htotal):
 
     var = toPlot.split("_")[-1]
     nrebin = variableName(var)
@@ -180,8 +187,8 @@ def plot2D(pad, toPlot, htotal, path):
     projx = htotal.ProjectionX()
     projy = htotal.ProjectionY()
 
-    pad.SetLogz()
-    pad.SetRightMargin(0.15)
+    c1.SetLogz()
+    c1.SetRightMargin(0.15)
     htotal.SetStats(0)
     htotal.SetTitle(toPlot)
     htotal.Draw("colz")
@@ -190,9 +197,9 @@ def plot2D(pad, toPlot, htotal, path):
     if len(nrebin) > 2:
         htotal.GetXaxis().SetRangeUser(0,nrebin[2])
 
-    pad.SaveAs(path+"/"+DR+toPlot+iteration+"_2DPlot.png")
-    pad.Print(path+"/"+DR+"_2DPlots_"+iteration+".pdf")
-    pad.Clear()
+    c1.SaveAs(path+"/"+DR+toPlot+iteration+"_2DPlot.png")
+    c1.Print(path+"/"+DR+"_2DPlots_"+iteration+".pdf")
+    c1.Clear()
 
     # projx.SetOptStat(111100)
     projx.Draw("E hist")
@@ -203,9 +210,9 @@ def plot2D(pad, toPlot, htotal, path):
     projx.SetFillColor(0)
     projx.SetLineWidth(3)
 
-    pad.SaveAs(path+"/"+DR+toPlot+iteration+"_ProjX.png")
-    pad.Print(path+"/"+DR+"_2DPlots_"+iteration+".pdf")
-    pad.Clear()
+    c1.SaveAs(path+"/"+DR+toPlot+iteration+"_ProjX.png")
+    c1.Print(path+"/"+DR+"_2DPlots_"+iteration+".pdf")
+    c1.Clear()
 
     # projy.SetOptStat(111100)
     projy.Draw("E hist")
@@ -221,6 +228,64 @@ def plot2D(pad, toPlot, htotal, path):
     projy.SetFillColor(0)
     projy.SetLineWidth(3)
 
-    pad.SaveAs(path+"/"+DR+toPlot+iteration+"_ProjY.png")
-    pad.Print(path+"/"+DR+"_2DPlots_"+iteration+".pdf")
-    pad.Clear()
+    c1.SaveAs(path+"/"+DR+toPlot+iteration+"_ProjY.png")
+    c1.Print(path+"/"+DR+"_2DPlots_"+iteration+".pdf")
+    c1.Clear()
+
+def drawSOverB(background,signal,var):
+
+  nbin = signal.GetNbinsX();
+
+  h_sqrt = ROOT.TH1D("h_sqrt", "", nbin, 0 ,100);
+  h_sqrt.Sumw2(); 
+
+  ratio = signal.Clone("ratio");
+  ratio.Sumw2();
+
+  for i in range(nbin):
+    s = ratio.GetBinContent(i+1)
+    b = background.GetBinContent(i+1)
+    if b > 0 :
+      b_sqrt = math.sqrt(b)
+      h_sqrt.SetBinContent(i+1, b_sqrt)
+
+  ratio.Divide(h_sqrt)
+
+  ratio.SetStats(0)
+  ratio.SetTitle("")
+
+  ratio.GetXaxis().SetTitle(var[1])
+  ratio.GetXaxis().SetTitleSize(0.135)
+  ratio.GetXaxis().SetLabelFont(43);
+  ratio.GetXaxis().SetLabelSize(30);
+
+  ratio.GetYaxis().SetTitle("S/#sqrt{B}")
+  ratio.GetYaxis().SetTitleSize(0.125)
+  ratio.GetYaxis().SetTitleOffset(0.3)
+  ratio.GetYaxis().SetLabelFont(43);
+  ratio.GetYaxis().SetLabelSize(25);
+  ratio.GetYaxis().SetNdivisions(6)  
+
+  ratio.SetMarkerStyle(21);
+  # ratio.SetMaximum(2.5);
+  ratio.SetMinimum(0);
+
+  ratio.GetYaxis().ChangeLabel(1, -1, 0)
+
+  return ratio
+
+def makeBkg(rootFile, SAMPLE, histo, xtitle = "x", ytitle = "y", rebin = 1):
+
+    f = ROOT.TFile(rootFile)
+
+    htot = f.Get(SAMPLE[0]+"_"+histo)
+    htot.Rebin(rebin)
+
+    for sample in SAMPLE[1:]:
+        h = f.Get(sample+"_"+histo)
+        h.Rebin(rebin)
+        htot.Add(h)
+
+    htot.Draw()
+
+    return htot

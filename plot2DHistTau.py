@@ -97,7 +97,6 @@ def addTCP(massTCP):
 
 	return sig
 
-
 if "-al" in opts:
 	iteration = '2DAltered'
 	ver = 'v5'

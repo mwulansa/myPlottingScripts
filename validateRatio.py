@@ -47,20 +47,21 @@ r = {
 	'Trigger'	: [1, "Triggers", 8]
 }
 
-ver = 'v3'
+ver = 'vdRTight'
 
 path ='/Users/muti/Documents/Analysis/studyCleanedTaus/Ff_'+ver+'/'
 
-DRs = ["DR3","DR6"]
+# DRs = ["DR3","DR6"]
+DRs = ["DR1","DR4"]
 
-variables = ["lowMt_TauPt","lowMt_Nj","lowMt","lowMt_TauPt0","lowMt_TauPt1","lowMt_TauPt10","lowMt_MetPt"]
+# variables = ["lowMt_TauPt","lowMt_Nj","lowMt","lowMt_TauPt1","lowMt_TauPt10","lowMt_MetPt"]
 # variables = ["TauPt","Nj","TauPt0","TauPt1","TauPt10"]
 
 # variables = ["Mass"]
 
 
-rFile1 = ROOT.TFile(path+DRs[0]+"_Ff_.root")
-rFile2 = ROOT.TFile(path+DRs[1]+"_Ff_.root")
+rFile1 = ROOT.TFile(path+DRs[0]+"_Ff.root")
+rFile2 = ROOT.TFile(path+DRs[1]+"_Ff.root")
 
 c1 = ROOT.TCanvas("c1","c1",850, 850)
 c1.cd()	
@@ -68,10 +69,10 @@ c1.Print(path+"Ratio"+DRs[0]+DRs[1]+".pdf[")
 
 for var in variables:
 	print(var)
-	r1 = rFile1.Get("hMuTau_SS_dRcut_highMET_"+var)
-	r2 = rFile2.Get("hMuTau_SS_lowMET_dRcut_"+var)
-	# r1 = rFile1.Get("hMuTau_highMt_dRcut_highMET_"+var)
-	# r2 = rFile2.Get("hMuTau_lowMET_dRcut_highMt_"+var)
+	# r1 = rFile1.Get("hMuTau_SS_dRcut_highMET_"+var)
+	# r2 = rFile2.Get("hMuTau_SS_lowMET_dRcut_"+var)
+	r1 = rFile1.Get("hMuTau_highMt_dRcut_highMET_"+var)
+	r2 = rFile2.Get("hMuTau_lowMET_dRcut_highMt_"+var)
 
 	ratio = r1.Clone("ratio")
 	ratio.Sumw2()

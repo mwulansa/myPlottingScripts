@@ -29,8 +29,14 @@ r = {
 	'Metcut' 	: [5, "M_{vis} (GeV)", 100],
 	'highMt'	: [5, "M_{vis} (GeV)", 100],
 	'dPhicut'	: [5, "M_{vis} (GeV)", 100],
-	'Trigger'	: [1, "Triggers", 8]
+	'Trigger'	: [1, "Triggers", 8],
+	'Mass' 		: [5, "M_{vis} (GeV)", 100]
 }
+
+# inVer = "v6"
+# altVer = "v6"
+# inDataVer = "v6" 
+# altDataVer = "v8" 
 
 inVer = "v6"
 altVer = "v6"
@@ -38,7 +44,9 @@ inDataVer = "v6"
 altDataVer = "v8" 
 
 iteration = "Ff"
-ver = "v4"
+ver = "vdRLoose"
+
+massTCP = 'm30'
 
 if "-dr1" in opts:
 	DRReg = "DR1_Ff"
@@ -46,6 +54,7 @@ if "-dr1" in opts:
 if "-dr2" in opts:
 	DRReg = "DR2_Ff"
 	histList = ['hMuTau_lowMET_dRcut_lowMt', 'hMuTau_lowMET_dRcut_lowMt_TauPt', 'hMuTau_lowMET_dRcut_lowMt_TauPt0','hMuTau_lowMET_dRcut_lowMt_TauPt10','hMuTau_lowMET_dRcut_lowMt_TauPt1','hMuTau_lowMET_dRcut_lowMt_Nj']
+	#histList = ['hMuTau_lowMET_dRcut_lowMt_TauPt']
 if "-dr3" in opts:
 	DRReg = "DR3_Ff"
 	histList = ['hMuTau_SS_dRcut_highMET_lowMt', 'hMuTau_SS_dRcut_highMET_lowMt_TauPt','hMuTau_SS_dRcut_highMET_lowMt_TauPt0','hMuTau_SS_dRcut_highMET_lowMt_TauPt10','hMuTau_SS_dRcut_highMET_lowMt_TauPt1', 'hMuTau_SS_dRcut_highMET_lowMt_Nj','hMuTau_SS_dRcut_highMET_lowMt_MetPt']
@@ -63,6 +72,7 @@ if "-dr7" in opts:
 	histList = ['hMuTau_SS_lowMET_dRcut_highMt', 'hMuTau_SS_lowMET_dRcut_highMt_TauPt', 'hMuTau_SS_lowMET_dRcut_highMt_Nj']
 
 AR = ['hMuTau_SR_dRcut_highMET_lowMt','hMuTau_SR_dRcut_highMET_lowMt_TauPt','hMuTau_SR_dRcut_highMET_lowMt_TauPt0','hMuTau_SR_dRcut_highMET_lowMt_TauPt10','hMuTau_SR_dRcut_highMET_lowMt_TauPt1','hMuTau_SR_dRcut_highMET_lowMt_Nj','hMuTau_SR_dRcut_highMET_lowMt_MetPt']
+#AR = ['hMuTau_SR_dRcut_highMET_lowMt_TauPt']
 
 path = '/Users/muti/Documents/Analysis/studyCleanedTaus/'+iteration+"_"+ver
 isExist = os.path.exists(path)
@@ -149,10 +159,8 @@ for n,hname in enumerate(histList):
 		data.Add(data2)
 
 		data.Rebin(r[toRebin[-2]][0])
-		data.SetLineWidth(3);
-		data.SetMarkerStyle(8);
-		data.SetMarkerSize(1);
-		data.SetLineColor(ROOT.kBlack);
+		data = myPlotFunc.plotStyle(data, r[toRebin[-2]][0], draw = "point")
+
 		if toPlot.split("_")[-2] == "TauPt" or toPlot.split("_")[-2] == "TauPt0" or toPlot.split("_")[-2] == "TauPt1" or toPlot.split("_")[-2] == "TauPt10":
 			data.GetXaxis().SetRangeUser(0,250)
 
@@ -325,19 +333,19 @@ for n,hname in enumerate(histList):
 
 	Ff.GetYaxis().SetTitle("F_{F}")
 	Ff.GetYaxis().SetTitleSize(0.045)
-	Ff.GetYaxis().SetLabelFont(43);
+	Ff.GetYaxis().SetLabelFont(43)
 	Ff.GetYaxis().SetLabelSize(25)
+
+	txtFf = open(path+"/F_F_"+DRReg+"_"+AR[n].split("_")[-1]+".txt", "w+")
+	for l in range(Ff.GetNbinsX()):
+		txtFf.write(str((l*20)+20)+"\t"+str(Ff.GetBinContent(l+1))+"\n")
+	txtFf.close()
 
 	lname = ROOT.TLegend(0.58,0.6,0.8,0.83)
 	lname.SetLineWidth(0)
 	lname.AddEntry(Ff, DRReg.split("_")[0])
 
 	nbinFf = Ff.GetNbinsX()
-
-	txtFf = open("F_F_"+DRReg+"_"+AR[n].split("_")[-1]+".txt", "w+")
-	for l in range(Ff.GetNbinsX()):
-		txtFf.write(str((l*20)+20)+"\t"+str(Ff.GetBinContent(l+1))+"\n")
-	txtFf.close()
 
 	Ff.Draw()
 	Ff.SetMaximum(1)
@@ -548,6 +556,11 @@ for n,hname in enumerate(histList):
 		hFFQCD.SetBinContent(i+1,hWQCD.GetBinContent(i+1)*Ff.GetBinContent(1+i)+wWjets)
 		lFFQCD.AddEntry(hFFQCD, str(hFFQCD.GetBinContent(i+1)))
 
+	txtFf_weighted = open(path+"/F_F_"+DRReg+"_"+AR[n].split("_")[-1]+"_weighted.txt", "w+")
+	for l in range(hFFQCD.GetNbinsX()):
+		txtFf_weighted.write(str((l*20)+20)+"\t"+str(hFFQCD.GetBinContent(l+1))+"\n")
+	txtFf_weighted.close()
+
 	hFFQCD.Draw("hist")
 	hFFQCD.SetMaximum(1)
 	hFFQCD.SetMinimum(0)
@@ -593,9 +606,20 @@ for n,hname in enumerate(histList):
 	lsAR.Draw("same")
 	diffAR.GetXaxis().SetTitle(r[AR[n].split("_")[-1]][1])
 	# ls.Draw("same")
+	c1.SaveAs(path+"/"+hname+"_Data-MC_AR.png")
 	c1.Print(path+"/"+DRReg+".pdf")
 	c1.Clear()
 
+	ldiffAR = ROOT.TLegend(0.15,0.15,0.85,0.85)
+
+	for k in range(nbinFf):
+		ldiffAR.AddEntry(diffAR, str(diffAR.GetBinContent(k+1)))
+
+	ldiffAR.Draw()
+
+	c1.Print(path+"/"+DRReg+".pdf")
+	c1.Clear()
+	
 	SR_predicted = ROOT.TH1F(AR[n]+"_SR_Predicted",AR[n]+"_SR_Predicted;"+r[AR[n].split("_")[-1]][1]+";N_{events}",r[AR[n].split("_")[-1]][2],0,r[AR[n].split("_")[-1]][2])
 
 	SR_predicted.SetLineWidth(3);

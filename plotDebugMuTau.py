@@ -42,7 +42,7 @@ r = {
 
 if "-al" in opts:
 	ver = "v6"
-	dataver = "v6"
+	dataver = "v8"
 	iteration = "AlteredID"
 
 if "-nm" in opts:
@@ -96,42 +96,59 @@ histToPlot = ['hMuTau_SS_TauPt', 'hMuTau_SS_dRcut_TauPt','hMuTau_SS_lowMET_TauPt
 
 if "-dr1" in opts:
 	collection = "DR1"
-	histToPlot = ['hMuTau_highMt_dRcut_highMET', 'hMuTau_highMt_dRcut_highMET_TauPt', 'hMuTau_highMt_dRcut_highMET_JetPt', 'hMuTau_highMt_dRcut_highMET_Nj', 'hMuTau_highMt_highMET', 'hMuTau_highMt_highMET_TauPt', 'hMuTau_highMt_highMET_JetPt', 'hMuTau_highMt_highMET_Nj', 'hMuTau_highMt_highMET_dRl', 'hMuTau_highMt_highMET_dRj']
+	REGION = ['hMuTau_highMt_dRcut_highMET', 'hMuTau_highMt_highMET']
+	# histToPlot = ['hMuTau_highMt_dRcut_highMET', 'hMuTau_highMt_dRcut_highMET_TauPt', 'hMuTau_highMt_dRcut_highMET_JetPt', 'hMuTau_highMt_dRcut_highMET_Nj', 'hMuTau_highMt_highMET', 'hMuTau_highMt_highMET_TauPt', 'hMuTau_highMt_highMET_JetPt', 'hMuTau_highMt_highMET_Nj', 'hMuTau_highMt_highMET_dRl', 'hMuTau_highMt_highMET_dRj']
 if "-dr2" in opts:
 	collection = "DR2"	
-	histToPlot = ['hMuTau_lowMET_dRcut_lowMt_TauPt','hMuTau_lowMET_lowMt_TauPt']
+	# histToPlot = ['hMuTau_lowMET_dRcut_lowMt_TauPt','hMuTau_lowMET_lowMt_TauPt']
+	REGION = ['hMuTau_lowMET_dRcut_lowMt', 'hMuTau_lowMET_lowMt']
 	# histToPlot = ['hMuTau_lowMET_dRcut_lowMt', 'hMuTau_lowMET_dRcut_lowMt_TauPt','hMuTau_lowMET_dRcut_lowMt_TauPt0','hMuTau_lowMET_dRcut_lowMt_TauPt1','hMuTau_lowMET_dRcut_lowMt_TauPt10', 'hMuTau_lowMET_dRcut_lowMt_MuonPt','hMuTau_lowMET_dRcut_lowMt_JetPt', 'hMuTau_lowMET_dRcut_lowMt_Nj', 'hMuTau_lowMET_lowMt', 'hMuTau_lowMET_lowMt_TauPt', 'hMuTau_lowMET_lowMt_JetPt', 'hMuTau_lowMET_lowMt_Nj', 'hMuTau_lowMET_lowMt_dRl', 'hMuTau_lowMET_lowMt_dRj']
 if "-dr3" in opts:
 	collection = "DR3"
-	histToPlot = ['hMuTau_SS_dRcut_highMET_lowMt', 'hMuTau_SS_dRcut_highMET_lowMt_TauPt','hMuTau_SS_dRcut_highMET_lowMt_TauPt0','hMuTau_SS_dRcut_highMET_lowMt_TauPt1','hMuTau_SS_dRcut_highMET_lowMt_TauPt10', 'hMuTau_SS_dRcut_highMET_lowMt_MuonPt','hMuTau_SS_dRcut_highMET_lowMt_JetPt', 'hMuTau_SS_dRcut_highMET_lowMt_Nj', 'hMuTau_SS_dRcut_MetPt', 'hMuTau_SS_dRcut_highMET_Mt']
+	REGION = ['hMuTau_SS_dRcut_highMET_lowMt']
+	# histToPlot = ['hMuTau_SS_dRcut_highMET_lowMt', 'hMuTau_SS_dRcut_highMET_lowMt_TauPt','hMuTau_SS_dRcut_highMET_lowMt_TauPt0','hMuTau_SS_dRcut_highMET_lowMt_TauPt1','hMuTau_SS_dRcut_highMET_lowMt_TauPt10', 'hMuTau_SS_dRcut_highMET_lowMt_MuonPt','hMuTau_SS_dRcut_highMET_lowMt_JetPt', 'hMuTau_SS_dRcut_highMET_lowMt_Nj', 'hMuTau_SS_dRcut_MetPt', 'hMuTau_SS_dRcut_highMET_Mt']
 if "-ar" in opts:	
 	if iteration == "Nominal": collection = "SR"
 	if iteration == "AlteredID": collection = "AR"
-	histToPlot = ['hMuTau_SR_dRcut_highMET_lowMt', 'hMuTau_SR_dRcut_highMET_lowMt_TauPt', 'hMuTau_SR_dRcut_highMET_lowMt_JetPt', 'hMuTau_SR_dRcut_highMET_lowMt_Nj', 'hMuTau_SR_dRcut_highMET_lowMt_MuonPt', 'hMuTau_SR_dRcut_highMET_lowMt_MetPt', 'hMuTau_SR_dRcut_highMET_lowMt_Mt','hMuTau_SR_dRcut_highMET_lowMt_TauPt0','hMuTau_SR_dRcut_highMET_lowMt_TauPt1','hMuTau_SR_dRcut_highMET_lowMt_TauPt10']
+	REGION = ['hMuTau_SR_dRcut_highMET_lowMt']
+	# histToPlot = ['hMuTau_SR_dRcut_highMET_lowMt', 'hMuTau_SR_dRcut_highMET_lowMt_TauPt', 'hMuTau_SR_dRcut_highMET_lowMt_JetPt', 'hMuTau_SR_dRcut_highMET_lowMt_Nj', 'hMuTau_SR_dRcut_highMET_lowMt_MuonPt', 'hMuTau_SR_dRcut_highMET_lowMt_MetPt', 'hMuTau_SR_dRcut_highMET_lowMt_Mt','hMuTau_SR_dRcut_highMET_lowMt_TauPt0','hMuTau_SR_dRcut_highMET_lowMt_TauPt1','hMuTau_SR_dRcut_highMET_lowMt_TauPt10']
 if "-dr4" in opts:
 	collection = "DR4"
-	histToPlot = ['hMuTau_lowMET_dRcut_highMt', 'hMuTau_lowMET_dRcut_highMt_TauPt', 'hMuTau_lowMET_dRcut_highMt_JetPt', 'hMuTau_lowMET_dRcut_highMt_Nj', 'hMuTau_lowMET_highMt', 'hMuTau_lowMET_highMt_TauPt', 'hMuTau_lowMET_highMt_JetPt', 'hMuTau_lowMET_highMt_Nj', 'hMuTau_lowMET_highMt_dRl', 'hMuTau_lowMET_highMt_dRj']
+	REGION = ['hMuTau_lowMET_dRcut_highMt','hMuTau_lowMET_highMt']
+	# histToPlot = ['hMuTau_lowMET_dRcut_highMt', 'hMuTau_lowMET_dRcut_highMt_TauPt', 'hMuTau_lowMET_dRcut_highMt_JetPt', 'hMuTau_lowMET_dRcut_highMt_Nj', 'hMuTau_lowMET_highMt', 'hMuTau_lowMET_highMt_TauPt', 'hMuTau_lowMET_highMt_JetPt', 'hMuTau_lowMET_highMt_Nj', 'hMuTau_lowMET_highMt_dRl', 'hMuTau_lowMET_highMt_dRj']
 if "-dr5" in opts:
 	collection = "DR5"
-	histToPlot = ['hMuTau_SS_dRcut_highMET_highMt', 'hMuTau_SS_dRcut_highMET_highMt_TauPt', 'hMuTau_SS_dRcut_highMET_highMt_TauPt0','hMuTau_SS_dRcut_highMET_highMt_TauPt1','hMuTau_SS_dRcut_highMET_highMt_TauPt10','hMuTau_SS_dRcut_highMET_highMt_JetPt', 'hMuTau_SS_dRcut_highMET_highMt_Nj']
+	REGION = ['hMuTau_SS_dRcut_highMET_highMt']
+	# histToPlot = ['hMuTau_SS_dRcut_highMET_highMt', 'hMuTau_SS_dRcut_highMET_highMt_TauPt', 'hMuTau_SS_dRcut_highMET_highMt_TauPt0','hMuTau_SS_dRcut_highMET_highMt_TauPt1','hMuTau_SS_dRcut_highMET_highMt_TauPt10','hMuTau_SS_dRcut_highMET_highMt_JetPt', 'hMuTau_SS_dRcut_highMET_highMt_Nj']
 if "-dr6" in opts:
 	collection = "DR6"
-	histToPlot = ['hMuTau_SS_lowMET_dRcut_lowMt_TauPt','hMuTau_SS_lowMET_lowMt_TauPt']
+	REGION = ['hMuTau_SS_lowMET_dRcut_lowMt','hMuTau_SS_lowMET_lowMt']
+	# histToPlot = ['hMuTau_SS_lowMET_dRcut_lowMt_TauPt','hMuTau_SS_lowMET_lowMt_TauPt']
 	# histToPlot = ['hMuTau_SS_lowMET_dRcut_lowMt', 'hMuTau_SS_lowMET_dRcut_lowMt_TauPt', 'hMuTau_SS_lowMET_dRcut_lowMt_MuonPt','hMuTau_SS_lowMET_dRcut_lowMt_JetPt', 'hMuTau_SS_lowMET_dRcut_lowMt_Nj', 'hMuTau_SS_lowMET_lowMt', 'hMuTau_SS_lowMET_lowMt_TauPt', 'hMuTau_SS_lowMET_lowMt_JetPt', 'hMuTau_SS_lowMET_lowMt_Nj', 'hMuTau_SS_lowMET_lowMt_dRj', 'hMuTau_SS_lowMET_lowMt_dRl','hMuTau_SS_lowMET_lowMt_MuonPt']
-
 if "-dr7" in opts:
 	collection = "DR7"
-	histToPlot = ['hMuTau_SS_lowMET_dRcut_highMt', 'hMuTau_SS_lowMET_dRcut_highMt_TauPt','hMuTau_SS_lowMET_dRcut_highMt_MuonPt', 'hMuTau_SS_lowMET_dRcut_highMt_JetPt', 'hMuTau_SS_lowMET_dRcut_highMt_Nj', 'hMuTau_SS_lowMET_highMt', 'hMuTau_SS_lowMET_highMt_TauPt', 'hMuTau_SS_lowMET_highMt_JetPt', 'hMuTau_SS_lowMET_highMt_Nj', 'hMuTau_SS_lowMET_highMt_dRl', 'hMuTau_SS_lowMET_highMt_dRj','hMuTau_SS_lowMET_highMt_MuonPt']
+	REGION = ['hMuTau_SS_lowMET_dRcut_highMt','hMuTau_SS_lowMET_highMt']
+	# histToPlot = ['hMuTau_SS_lowMET_dRcut_highMt', 'hMuTau_SS_lowMET_dRcut_highMt_TauPt','hMuTau_SS_lowMET_dRcut_highMt_MuonPt', 'hMuTau_SS_lowMET_dRcut_highMt_JetPt', 'hMuTau_SS_lowMET_dRcut_highMt_Nj', 'hMuTau_SS_lowMET_highMt', 'hMuTau_SS_lowMET_highMt_TauPt', 'hMuTau_SS_lowMET_highMt_JetPt', 'hMuTau_SS_lowMET_highMt_Nj', 'hMuTau_SS_lowMET_highMt_dRl', 'hMuTau_SS_lowMET_highMt_dRj','hMuTau_SS_lowMET_highMt_MuonPt']
+
+VARIABLE = ['TauPt','Nj', 'JetPt', 'MuonPt']
+
+histToPlot = []
+
+for region in REGION:
+    histToPlot.append(region)
+    for variable in VARIABLE:
+        histToPlot.append(region+"_"+variable)
+
 
 ROOT.gStyle.SetOptStat(111010)
 
 c1 = ROOT.TCanvas("c1","c1",850, 850)
 c1.cd()
-# c1.SetLogy()
+c1.SetLogy()
 if oneData == True:
 	c1.Print(path+"/"+collection+"_"+iteration+"_"+dataset+"Only.pdf[")
 else:
-	c1.Print(path+"/"+collection+"_"+iteration+".pdf[")
+	c1.Print(path+"/"+collection+"_"+iteration+"_"+ver+".pdf[")
 
 histToNorm = []
 ROOT.TH1.AddDirectory(0)
@@ -180,55 +197,60 @@ for toPlot in histToPlot:
 
 	sig = myPlotFunc.plotStyle(sig, r[toRebin[-1]][0], 4, 4, fillStyle = 3334)
 
-	if oneData == True:
-		if dataset == "SingleMuon":
-			data = d1.Get(toPlot)
-		if dataset == "JetHT":
-			data = d2.Get(toPlot)
-	else:
-		data1 = d1.Get(toPlot)
-		data2 = d2.Get(toPlot)
-		data = data1.Clone("data")
-		data.Add(data2)
+	if collection != "SR":
 
-	# data = d2.Get(toPlot);
-	data.Rebin(r[toRebin[-1]][0])
+		if oneData == True:
+			if dataset == "SingleMuon":
+				data = d1.Get(toPlot)
+			if dataset == "JetHT":
+				data = d2.Get(toPlot)
+		else:
+			data1 = d1.Get(toPlot)
+			data2 = d2.Get(toPlot)
+			data = data1.Clone("data")
+			data.Add(data2)
 
-	data = myPlotFunc.plotStyle(data, r[toRebin[-1]][0], 1, xtitle = r[toRebin[-1]][1])
+		data.Rebin(r[toRebin[-1]][0])
+		data = myPlotFunc.plotStyle(data, r[toRebin[-1]][0], 1, xtitle = r[toRebin[-1]][1])
 
 	hbkg = myPlotFunc.plotStyle(hbkg, r[toRebin[-1]][0], 12, 12, r[toRebin[-1]][1], 3244, draw = "E20P")
 	hbkg_nQCD = myPlotFunc.plotStyle(hbkg_nQCD, r[toRebin[-1]][0], 12, 12, r[toRebin[-1]][1], 3244, draw = "E20P")
 
-	data_norm = data.Clone("data_norm")
-	data_norm.Sumw2()
-	data_norm.Scale(1/data.Integral())
+	if collection != "SR":	
+		data_norm = data.Clone("data_norm")
+		data_norm.Sumw2()
+		data_norm.Scale(1/data.Integral())
+		histToNorm.append(data_norm)
 
 	hbkg_norm = hbkg_nQCD.Clone("hbkg_norm")
 	hbkg_norm.Sumw2()
 	hbkg_norm.Scale(1/hbkg_nQCD.Integral())
-
-	histToNorm.append(data_norm)
+	
 	histToNorm.append(hbkg_norm)
 
-	nbindata = data.GetNbinsX()
 
 	ld = ROOT.TLegend(0.4,0.5,0.83,0.88)
 	ld.SetLineWidth(0)
-	if oneData == True:
-		ld.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
-	elif iteration == "Inclusive" or iteration == "AlteredID" or iteration == "Nominal":
-		ld.AddEntry(data, "SingleMuon + JetHT - "+str(int(data.Integral(1,nbindata+1))), "l");
-	else: ld.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
+
+	if collection != "SR":
+		nbindata = data.GetNbinsX()
+		if oneData == True:
+			ld.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
+		elif iteration == "Inclusive" or iteration == "AlteredID" or iteration == "Nominal":
+			ld.AddEntry(data, "SingleMuon + JetHT - "+str(int(data.Integral(1,nbindata+1))), "l");
+		else: ld.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
 
 	c1.cd()
 
-	data.SetTitle(toPlot+"_DataOnly")
-	data.Draw("E0P");	
-	if data.GetMaximum() >= 10000:
-		data.GetYaxis().SetMaxDigits(4)
-	else: data.GetYaxis().SetMaxDigits(3)
-	if toRebin[-1] == "TauPt":
-		data.GetXaxis().SetRangeUser(0,260)
+	if collection != "SR":
+		data.SetTitle(toPlot+"_DataOnly")
+		data.Draw("E0P");	
+		if data.GetMaximum() >= 10000:
+			data.GetYaxis().SetMaxDigits(4)
+		else: data.GetYaxis().SetMaxDigits(3)
+
+		if toRebin[-1] == "TauPt":
+			data.GetXaxis().SetRangeUser(0,260)
 	ld.Draw("same")
 
 	if oneData == True:
@@ -237,7 +259,7 @@ for toPlot in histToPlot:
 		c1.Clear()
 	else:
 		c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+ver+"_DataOnly.png")
-		c1.Print(path+"/"+collection+"_"+iteration+".pdf")
+		c1.Print(path+"/"+collection+"_"+iteration+"_"+ver+".pdf")
 		c1.Clear()
 
 	lmc = ROOT.TLegend(0.5,0.55,0.9,0.88)
@@ -263,53 +285,64 @@ for toPlot in histToPlot:
 	lmc.Draw("same")
 
 	c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+ver+"_MCOnly.png")
-	c1.Print(path+"/"+collection+"_"+iteration+".pdf")
+	c1.Print(path+"/"+collection+"_"+iteration+"_"+ver+".pdf")
 	c1.Clear()
 
 	#lg = ROOT.TLegend(0.28,0.35,0.53,0.67)
 	lg = ROOT.TLegend(0.3,0.7,0.83,0.88)
 	lg.SetLineWidth(0)
 	lg.SetNColumns(2)
-	if oneData == True:
-		lg.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
-	elif iteration == "Inclusive" or iteration == "AlteredID" or iteration == "Nominal":
-		lg.AddEntry(data, "SingleMuon + JetHT - "+str(int(data.Integral(1,nbindata+1))), "l");
-	else: lg.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
+	if collection != "SR":
+		if oneData == True:
+			lg.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
+		elif iteration == "Inclusive" or iteration == "AlteredID" or iteration == "Nominal":
+			lg.AddEntry(data, "SingleMuon + JetHT - "+str(int(data.Integral(1,nbindata+1))), "l");
+		else: lg.AddEntry(data, dataset+" - "+str(int(data.Integral(1,nbindata+1))), "l");
 	lg.AddEntry(hists['QCD'], "QCD - "+str(int(integral['QCD'])), "f");
 	lg.AddEntry(hists['TTJets'], "TTJets - "+str(int(integral['TTJets'])), "f");
 	lg.AddEntry(hists['DYJetsToLL'], "DYJetsToLL - "+str(int(integral['DYJetsToLL']+integral['DYJetsToLL_M-4to50'])), "f");
 	lg.AddEntry(hists['WJetsToLNu'], "WJetsToLNu - "+str(int(integral['WJetsToLNu'])), "f");
 	lg.AddEntry(hists['Diboson'], "Diboson - "+str(int(integral['Diboson'])), "f");
-	lg.AddEntry(sig, "TCP_"+massTCP+" - "+str(int(sig.Integral(1,nbindata+1))), "f");
+	nbintcp = sig.GetNbinsX()
+	lg.AddEntry(sig, "TCP_"+massTCP+" - "+str(int(sig.Integral(1,nbintcp+1))), "f");
 	lg.AddEntry(hbkg, "Bkg. Uncert.", "f");
 
 	l = ROOT.TLine(0,1,(r[toRebin[-1]][2]),1)
 	l.SetLineColor(ROOT.kRed)
 	l.SetLineStyle(10)
 
-	myPlotFunc.drawPad1(r[toRebin[-1]]);
+	myPlotFunc.drawPad1(r[toRebin[-1]], logy = True);
 	bkg.SetMinimum(1)
-	bkg.SetMaximum(1E7)
-	# if bkg.GetMaximum() < data.GetMaximum():
-	# 	bkg.SetMaximum(data.GetMaximum()*1.2)
+	# bkg.SetMaximum(1E7)
+	if collection != "SR":
+		if bkg.GetMaximum() < data.GetMaximum():
+			bkg.SetMaximum(data.GetMaximum()*1.2)
+	# bkg.SetMaximum(1E4)
 	bkg.Draw("hist")
 	hbkg.Draw("same E20P");
-	data.Draw("same E0P");
+	if collection != "SR":
+		data.Draw("same E0P");
+		if toRebin[-1] == "TauPt": data.GetXaxis().SetRangeUser(0,260)
 	sig.Draw("same hist")
 	bkg.GetYaxis().SetTitle()
 	if toRebin[-1] == "TauPt":
 		bkg.GetXaxis().SetRangeUser(0,260)
-		hbkg.GetXaxis().SetRangeUser(0,260)
-		data.GetXaxis().SetRangeUser(0,260)
+		hbkg.GetXaxis().SetRangeUser(0,260)		
 		sig.GetXaxis().SetRangeUser(0,260)
 	if toRebin[-1] != "Trigger" :
 		lg.Draw("same")
 	c1.cd();
-	myPlotFunc.drawPad2();	
-	rhist = myPlotFunc.drawRatio(hbkg,data,r[toRebin[-1]])
 
-	rhist[0].Draw()
-	rhist[1].Draw("same E20P")
+	if collection != "SR":	
+		myPlotFunc.drawPad2();	
+		rhist = myPlotFunc.drawRatio(hbkg,data,r[toRebin[-1]])
+		rhist[0].Draw()
+		rhist[1].Draw("same E20P")
+
+	else :
+		myPlotFunc.drawPad2();
+		sbhist = myPlotFunc.drawSOverB(hbkg, sig, r[toRebin[-1]])
+		sbhist.Draw()
 
 	if oneData == True:
 		c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+dataset+"Only_"+ver+".png")
@@ -317,42 +350,44 @@ for toPlot in histToPlot:
 		c1.Clear()
 	else:
 		c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+ver+".png")
-		c1.Print(path+"/"+collection+"_"+iteration+".pdf")
+		c1.Print(path+"/"+collection+"_"+iteration+"_"+ver+".pdf")
 		c1.Clear()
 
 	# print(hists)
 
-histToNorm[2] = myPlotFunc.plotStyle(histToNorm[2], lineColour = 4, xtitle = r["TauPt"][1], EvBin = r["TauPt"][0])
+if collection != "SR":	
 
-ln = ROOT.TLegend(0.4,0.5,0.83,0.88)
-ln.SetLineWidth(0)
-ln.AddEntry(histToNorm[2], "Before dR cut", "l")
-ln.AddEntry(histToNorm[0], "After dR cut", "l")
+	histToNorm[2] = myPlotFunc.plotStyle(histToNorm[2], lineColour = 4, xtitle = r["TauPt"][1], EvBin = r["TauPt"][0])
 
-histToNorm[2].Draw()
-histToNorm[0].Draw("same")
-ln.Draw("same")
+	ln = ROOT.TLegend(0.4,0.5,0.83,0.88)
+	ln.SetLineWidth(0)
+	ln.AddEntry(histToNorm[2], "Before dR cut", "l")
+	ln.AddEntry(histToNorm[0], "After dR cut", "l")
 
-histToNorm[2].GetXaxis().SetRangeUser(0,260)
-histToNorm[0].GetXaxis().SetRangeUser(0,260)
+	histToNorm[2].Draw()
+	histToNorm[0].Draw("same")
+	ln.Draw("same")
 
-c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+ver+"_DataOnly_Norm.png")
-c1.Print(path+"/"+collection+"_"+iteration+".pdf")
-c1.Clear()
+	histToNorm[2].GetXaxis().SetRangeUser(0,260)
+	histToNorm[0].GetXaxis().SetRangeUser(0,260)
 
-histToNorm[1] = myPlotFunc.plotStyle(histToNorm[1], lineColour = 1, xtitle = r["TauPt"][1], EvBin = r["TauPt"][0])
-histToNorm[3] = myPlotFunc.plotStyle(histToNorm[3], lineColour = 4, xtitle = r["TauPt"][1], EvBin = r["TauPt"][0])
+	c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+ver+"_DataOnly_Norm.png")
+	c1.Print(path+"/"+collection+"_"+iteration+"_"+ver+".pdf")
+	c1.Clear()
 
-histToNorm[3].Draw()
-histToNorm[1].Draw("same")
-ln.Draw("same")
+	histToNorm[1] = myPlotFunc.plotStyle(histToNorm[1], lineColour = 1, xtitle = r["TauPt"][1], EvBin = r["TauPt"][0])
+	histToNorm[3] = myPlotFunc.plotStyle(histToNorm[3], lineColour = 4, xtitle = r["TauPt"][1], EvBin = r["TauPt"][0])
 
-histToNorm[3].GetXaxis().SetRangeUser(0,260)
-histToNorm[1].GetXaxis().SetRangeUser(0,260)
+	histToNorm[3].Draw()
+	histToNorm[1].Draw("same")
+	ln.Draw("same")
 
-c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+ver+"_MCOnly_Norm.png")
-c1.Print(path+"/"+collection+"_"+iteration+".pdf")
-c1.Clear()
+	histToNorm[3].GetXaxis().SetRangeUser(0,260)
+	histToNorm[1].GetXaxis().SetRangeUser(0,260)
+
+	c1.SaveAs(path+"/"+toPlot+"_"+iteration+"_"+ver+"_MCOnly_Norm.png")
+	c1.Print(path+"/"+collection+"_"+iteration+"_"+ver+".pdf")
+	c1.Clear()
 
 print("Outputs in", path)
 print(histToPlot)
@@ -360,4 +395,4 @@ print(histToPlot)
 if oneData == True:
 	c1.Print(path+"/"+collection+"_"+iteration+"_"+dataset+"Only.pdf]")
 else:
-	c1.Print(path+"/"+collection+"_"+iteration+".pdf]")
+	c1.Print(path+"/"+collection+"_"+iteration+"_"+ver+".pdf]")
