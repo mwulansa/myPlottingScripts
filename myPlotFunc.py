@@ -63,7 +63,7 @@ def variableName(argument):
         case "DimuonMass":
             return r['TauPt'][0],r['Mass'][0]
 
-def plotStyle(histogram, EvBin = 1, lineColour = 1, fillColour = 0, xtitle = "hist", fillStyle = 1001, draw = "hist"):
+def plotStyle(histogram, EvBin = 1, lineColour = 1, fillColour = 0, width = 3, xtitle = "hist", fillStyle = 1001, draw = "hist"):
 
     htemp = histogram.Clone("htemp")
 
@@ -72,7 +72,7 @@ def plotStyle(histogram, EvBin = 1, lineColour = 1, fillColour = 0, xtitle = "hi
         htemp.SetMarkerSize(1)
 
     htemp.SetStats(0)   
-    htemp.SetLineWidth(3)
+    htemp.SetLineWidth(width)
 
     if htemp.GetMaximum() >= 10000:
         htemp.GetYaxis().SetMaxDigits(4)

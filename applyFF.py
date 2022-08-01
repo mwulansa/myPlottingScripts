@@ -188,7 +188,7 @@ c1.Clear()
 
 #-----overlay with MC
 
-projyNew = myPlotFunc.plotStyle(projyNew, 5, lineColour = 12, xtitle = "M_{vis.} (GeV)")
+projyNew = myPlotFunc.plotStyle(projyNew, 5, lineColour = 12, width = 5, xtitle = "M_{vis.} (GeV)")
 
 # def makeBkgStack(rootFile, SAMPLE, histo, xtitle = "x", ytitle = "y"):
 
@@ -249,6 +249,7 @@ lgSF.AddEntry(sig, "TCP_"+massTCP+" - "+str(int(sig.Integral())), "f");
 lgSF.AddEntry(errMass, "Bkg. Uncert.", "f")
 lgSF.AddEntry(projyNew, "Bkg. Predicted - "+str(int(projyNew.Integral())), "l")
 
+
 myPlotFunc.drawPad1("var", logy = True)
 tmpStack.Draw("hist")
 tmpStack.SetMinimum(1)
@@ -286,6 +287,20 @@ lbkg.AddEntry(htot_nQCD, "Bin 2 - 6 = "+str(htot_nQCD.Integral(2,6)))
 lbkg.AddEntry(htot_nQCD, "Bin 6 onwards = "+str(htot_nQCD.Integral(6,nbiny)))
 
 lbkg.Draw()
+c1.Print(path+"/"+iteration+"_"+DR+"_"+FFver+".pdf")
+c1.Clear()
+
+lc = ROOT.TLegend(0.15,0.15,0.85,0.85)
+lc.AddEntry(histMass['Diboson'], "Bin 2 - 6 (Diboson) = "+str(histMass['Diboson'].Integral(2,6)),"l")
+lc.AddEntry(histMass['TTJets'], "Bin 2 - 6 (TTJets) = "+str(histMass['TTJets'].Integral(2,6)),"l")
+lc.AddEntry(histMass['WJetsToLNu'], "Bin 2 - 6 (WJetsToLNu) = "+str(histMass['WJetsToLNu'].Integral(2,6)),"l")
+lc.AddEntry(histMass['DYJetsToLL'], "Bin 2 - 6 (DYJetsToLL) = "+str( histMass['DYJetsToLL'].Integral(2,6) + histMass['DYJetsToLL_M-4to50'].Integral(2,6)),"l")
+lc.AddEntry(histMass['Diboson'], "Bin 6 onwards (Diboson) = "+str(histMass['Diboson'].Integral(6,nbiny)),"l")
+lc.AddEntry(histMass['TTJets'], "Bin 6 onwards (TTJets) = "+str(histMass['TTJets'].Integral(6,nbiny)),"l")
+lc.AddEntry(histMass['WJetsToLNu'], "Bin 6 onwards (WJetsToLNu) = "+str(histMass['WJetsToLNu'].Integral(6,nbiny)),"l")
+lc.AddEntry(histMass['DYJetsToLL'], "Bin 6 onwards (DYJetsToLL) = "+str( histMass['DYJetsToLL'].Integral(6,nbiny) + histMass['DYJetsToLL_M-4to50'].Integral(6,nbiny)),"l")
+
+lc.Draw()
 c1.Print(path+"/"+iteration+"_"+DR+"_"+FFver+".pdf")
 c1.Clear()
 

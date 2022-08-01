@@ -1,3 +1,5 @@
 *.root
 *.png
-*.C
+*.C*
+*.txt
+*.pdf
